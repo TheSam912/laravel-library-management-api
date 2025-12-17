@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMemberRequest;
+use App\Http\Requests\UpdateMemberRequest;
 use App\Http\Resources\MemberResource;
 use App\Models\Member;
 use Illuminate\Http\Request;
@@ -56,7 +57,7 @@ class MemberController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreMemberRequest $request, Member $member)
+    public function update(UpdateMemberRequest $request, Member $member)
     {
         $member->update($request->validated());
 

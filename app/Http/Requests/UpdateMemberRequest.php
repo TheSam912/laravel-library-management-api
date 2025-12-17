@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class StoreMemberRequest extends FormRequest
+class UpdateMemberRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,7 +24,10 @@ class StoreMemberRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:members,email',
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('members', 'email')->ignore($this->route('member')->id)],
             'phone' => 'required|string',
             'address' => 'nullable|string',
             'membership_date' => 'date',
