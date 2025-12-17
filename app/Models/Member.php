@@ -29,7 +29,7 @@ class Member extends Model
         return $this->hasMany(Borrowing::class);
     }
 
-    public function activeborrowing(): HasMany
+    public function activeborrowings(): HasMany
     {
         return $this->borrowings()->where('status', 'borrowed');
     }

@@ -9,9 +9,6 @@ use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
         $query = Book::with('author');
@@ -28,7 +25,12 @@ class BookController extends Controller
             });
         }
 
-        return BooksResource::collection($query->paginate(10));
+        if ($request->has('genre')) {
+            $query->where('genre', $request->genre);
+        }
+        $book = $query->paginate(10);
+
+        return BooksResource::collection($book);
     }
 
     /**
